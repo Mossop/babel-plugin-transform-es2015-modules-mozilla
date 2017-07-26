@@ -9,19 +9,25 @@ module.exports = function() {
         const source = path.node.source.value;
 
         const specifier = path.node.specifiers[0];
-        if (hasXPCOMModules && path.node.specifiers.length === 1 &&
-            specifier.imported.name === specifier.local.name) {
+        if (hasXPCOMModules && path.node.specifiers.length === 1) {
+          const args = [
+            t.ThisExpression(),
+            t.StringLiteral(specifier.local.name),
+            t.StringLiteral(source)
+          ];
+
+          if (specifier.local.name !== specifier.imported.name) {
+            args.push(t.StringLiteral(specifier.imported.name));
+          }
+
           path.replaceWith(
             t.CallExpression(
               t.MemberExpression(
                 t.Identifier("XPCOMUtils"),
                 t.Identifier("defineLazyModuleGetter"),
                 false
-              ), [
-                t.ThisExpression(),
-                t.StringLiteral(specifier.local.name),
-                t.StringLiteral(source)
-              ]
+              ),
+              args
             )
           );
         } else {
