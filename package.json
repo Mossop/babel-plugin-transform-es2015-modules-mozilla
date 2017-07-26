@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "babel-types": "^6.24.1"
+  },
+  "description": "This plugin transforms ES2015 modules to Mozilla imports",
+  "keywords": [
+    "babel-plugin"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "babel-plugin-transform-es2015-modules-mozilla",
+  "version": "0.9.0"
+}
