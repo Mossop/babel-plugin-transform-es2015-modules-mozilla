@@ -4,6 +4,7 @@ module.exports = function() {
   let hasXPCOMModules = false;
 
   return {
+    name: "babel-plugin-transform-es2015-modules-mozilla",
     visitor: {
       ImportDeclaration(path) {
         const source = path.node.source.value;
